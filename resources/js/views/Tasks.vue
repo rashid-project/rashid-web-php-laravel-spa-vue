@@ -3,7 +3,7 @@
         <ul>
             <li v-for="task in tasks">
                 {{ task.name }}
-                <button type="button" @click="complete(task)"> Complete{{ task.isCompleted ? 'd' : '' }} </button>
+                <button type="button" @click="toggleCompletion(task)"> {{ task.isComplete ? 'Uncomplete' : 'Complete' }} </button>
             </li>
         </ul>
     </div>
@@ -22,13 +22,17 @@
             getTasks() {
                 axios.get('api/task').then(response => {
                     this.tasks = response.data.data.map(task => {
-                        task.isCompleted = false
+                        task.isComplete = task.is_complete == 1;
                         return task;
                     });
                 });
             },
-            complete(task) {
-                task.isCompleted = true;
+            toggleCompletion(task) {
+                axios.post(`api/task/${task.id}/${task.isComplete ? 'uncomplete' : 'complete'}`)
+                    .then(response => {
+                        task.isComplete = response.data.data.is_complete == 1;
+                    });
+
             },
         },
         created() {
