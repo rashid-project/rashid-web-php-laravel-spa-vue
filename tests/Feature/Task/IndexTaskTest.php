@@ -11,7 +11,7 @@ class IndexTaskTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function get_a_list_of_tasks()
+    public function spec_1_4_1_get_a_list_of_tasks()
     {
         $this->withoutExceptionHandling();
 
