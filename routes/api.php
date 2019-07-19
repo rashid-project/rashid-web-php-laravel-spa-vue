@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::resource('task', 'TaskController');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+/**
+ * If we got to here we didn't match any API routes, but we want to return a 404 for any
+ * unmatched routes with an /api prefix for debugging and consistency purposes as we know
+ * those requests are not intended for the single page application
+ */
+Route::get('{any}', function () {
+    abort(404);
 });

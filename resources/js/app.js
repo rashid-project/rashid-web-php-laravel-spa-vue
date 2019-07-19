@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 import App from './views/App'
 import Home from './views/Home'
+import Tasks from './views/Tasks'
 
 const router = new VueRouter({
     mode: 'history',
@@ -12,7 +13,12 @@ const router = new VueRouter({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
+        },
+        {
+            path: '/tasks',
+            name: 'tasks',
+            component: Tasks,
         },
     ],
 });
